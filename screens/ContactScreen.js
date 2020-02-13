@@ -6,8 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { ListItem, SearchBar } from "react-native-elements";
+import { ListItem, Button } from "react-native-elements";
 import { useIsFocused } from "@react-navigation/native";
 
 import usePrevious from "../utils/usePrevious";
@@ -74,6 +73,20 @@ const ContactScreen = ({ navigation }) => {
     }
   }, [isFocused, prevIsFocused]);
 
+  navigation.setOptions({
+    title: "",
+    headerRight: () => (
+      <Button
+        title="ADD"
+        onPress={() => {
+          // Pass params back to home screen
+          navigation.navigate("CreateContact");
+        }}
+        type="clear"
+      />
+    ),
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.listHeader}>
@@ -106,6 +119,7 @@ const styles = StyleSheet.create({
   },
   listHeader: {
     paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   listHeaderText: {
     fontSize: 24,

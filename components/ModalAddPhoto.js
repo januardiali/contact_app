@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet, Modal } from "react-native";
 import PropTypes from "prop-types";
-import { Avatar, Header, Text } from "react-native-elements";
+import { Avatar, Header, Text, Button } from "react-native-elements";
 
 import HeaderContact from "./HeaderContact";
 
@@ -20,17 +20,18 @@ const ModalAddPhoto = props => {
       <>
         <Header
           placement="left"
-          leftComponent={{
-            icon: "chevron-left",
-            text: "Cancel",
-            onPress: onCancelPress,
-          }}
-          rightComponent={{
-            text: "Done",
-            onPress: onDonePress,
-            disabled: validPhoto,
-          }}
-          containerStyle={{ backgroundColor: "#FFFFFF" }}
+          leftComponent={
+            <Button title="Cancel" onPress={onCancelPress} type="clear" />
+          }
+          rightComponent={
+            <Button
+              title="Done"
+              onPress={onDonePress}
+              disabled={!validPhoto}
+              type="clear"
+            />
+          }
+          containerStyle={styles.headerContainer}
         />
         <HeaderContact photo={photo} />
         <View style={styles.wrapperSuggestion}>
@@ -86,5 +87,15 @@ const styles = StyleSheet.create({
   },
   suggestionList: {
     flexDirection: "row",
+  },
+  headerContainer: {
+    ...Platform.select({
+      android: {
+        paddingTop: 0,
+        elevation: 20,
+        height: 56,
+      },
+    }),
+    backgroundColor: "#FFFFFF",
   },
 });
