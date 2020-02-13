@@ -1,5 +1,11 @@
 import * as React from "react";
-import { FlatList, View, Text, TextInput, StyleSheet } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ListItem, SearchBar } from "react-native-elements";
 import { useIsFocused } from "@react-navigation/native";
@@ -31,14 +37,6 @@ const ContactScreen = ({ navigation }) => {
     } catch (e) {
       console.warn(e);
     }
-  };
-
-  const renderHeader = () => {
-    return (
-      <View style={styles.listHeader}>
-        <Text style={styles.listHeaderText}>Contacts</Text>
-      </View>
-    );
   };
 
   const renderItem = ({ item, index }) => {
@@ -78,14 +76,23 @@ const ContactScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.contentContainer}
-        data={contacts}
-        keyExtractor={item => item.id}
-        ListHeaderComponent={renderHeader}
-        renderItem={renderItem}
-        ItemSeparatorComponent={renderSeparator}
-      />
+      <View style={styles.listHeader}>
+        <Text style={styles.listHeaderText}>Contacts</Text>
+      </View>
+      {loading && (
+        <View style={styles.wrapperLoading}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+      {!loading && (
+        <FlatList
+          contentContainerStyle={styles.contentContainer}
+          data={contacts}
+          keyExtractor={item => item.id}
+          renderItem={renderItem}
+          ItemSeparatorComponent={renderSeparator}
+        />
+      )}
     </View>
   );
 };
@@ -122,5 +129,10 @@ const styles = StyleSheet.create({
     width: "86%",
     backgroundColor: "#CED0CE",
     marginLeft: "14%",
+  },
+  wrapperLoading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

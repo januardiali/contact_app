@@ -259,12 +259,14 @@ const ContactDetailScreen = ({ navigation, route }) => {
             suggestionsPhoto={suggestionsPhoto}
             onSelectPhoto={suggestionPhoto => setSelectedPhoto(suggestionPhoto)}
           />
-          <View style={styles.sectionBottom}>
-            <Button
-              title="Delete Contact"
-              onPress={() => onDeleteContact(params.item.id)}
-            />
-          </View>
+          {!isEdit && (
+            <View style={styles.sectionBottom}>
+              <Button
+                title="Delete Contact"
+                onPress={() => onDeleteContact(params.item.id)}
+              />
+            </View>
+          )}
         </>
       )}
       <ModalIndicator
