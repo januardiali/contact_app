@@ -1,16 +1,17 @@
-import { useLinking } from '@react-navigation/native';
-import { Linking } from 'expo';
+import { useLinking } from "@react-navigation/native";
+import { Linking } from "expo";
 
 export default function(containerRef) {
   return useLinking(containerRef, {
-    prefixes: [Linking.makeUrl('/')],
+    prefixes: [Linking.makeUrl("/")],
     config: {
       Root: {
-        path: 'root',
+        path: "root",
         screens: {
-          Home: 'home',
-          Links: 'links',
-          Settings: 'settings',
+          Contact: "contact",
+          Home: "home",
+          Links: "links",
+          Settings: "settings",
         },
       },
     },
