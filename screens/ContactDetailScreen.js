@@ -98,19 +98,15 @@ const ContactDetailScreen = ({ navigation, route }) => {
       let responseJson = await response.json();
       if (responseJson.statusCode === 400 || responseJson.statusCode === 500) {
         setLoadingEdit(false);
-        setTimeout(() => {
-          onShowAlert("failed", responseJson.message);
-        }, 1000);
+        onShowAlert("failed", responseJson.message);
       } else {
         setLoadingEdit(false);
         setDetail(responseJson.data);
         setInput(responseJson.data);
-        setTimeout(() => {
-          onShowAlert("success", responseJson.message);
-        }, 1000);
+        onShowAlert("success", responseJson.message);
       }
     } catch (e) {
-      console.warn(e);
+      onShowAlert("error", e);
     }
   };
 

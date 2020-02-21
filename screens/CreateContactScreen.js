@@ -7,6 +7,7 @@ import {
   Alert,
   Modal,
   SafeAreaView,
+  Toas,
 } from "react-native";
 import { Avatar, Button, Header } from "react-native-elements";
 import ModalIndicator from "../components/ModalIndicator";
@@ -71,17 +72,13 @@ const CreateContactScreen = ({ navigation }) => {
       let responseJson = await response.json();
       if (responseJson.statusCode === 400 || responseJson.statusCode === 500) {
         setLoading(false);
-        setTimeout(() => {
-          onShowAlert("failed", responseJson.message);
-        }, 1000);
+        onShowAlert("failed", responseJson.message);
       } else {
         setLoading(false);
-        setTimeout(() => {
-          onShowAlert("success", responseJson.message);
-        }, 1000);
+        onShowAlert("success", responseJson.message);
       }
     } catch (e) {
-      console.warn(e, "error");
+      onShowAlert("error", e);
     }
   };
 

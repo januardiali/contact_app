@@ -15,7 +15,6 @@ const ContactScreen = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [contacts, setContacts] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [search, setSearch] = React.useState("");
   const prevIsFocused = usePrevious(isFocused);
   const getContact = async () => {
     setLoading(true);
@@ -44,18 +43,16 @@ const ContactScreen = ({ navigation }) => {
       item.firstName.split("")[0].toUpperCase() +
       item.lastName.split("")[0].toUpperCase();
     return (
-      <View>
-        <ListItem
-          key={index}
-          leftAvatar={{
-            source: { uri: item.photo },
-            size: "small",
-            title: titleAvatar,
-          }}
-          title={name}
-          onPress={() => navigation.navigate("ContactDetail", { item })}
-        />
-      </View>
+      <ListItem
+        key={index}
+        leftAvatar={{
+          source: { uri: item.photo },
+          size: "small",
+          title: titleAvatar,
+        }}
+        title={name}
+        onPress={() => navigation.navigate("ContactDetail", { item })}
+      />
     );
   };
 
